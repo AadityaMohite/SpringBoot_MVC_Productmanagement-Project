@@ -116,9 +116,12 @@ input:focus, select:focus {
 </a>
 <br>
 
-<h2>Add Product</h2>
+<h2>Update Product</h2>
+<h3 th:text="${msg}" style="color:green"></h3>
 
-<form th:action="@{save}" th:object="${product}" method="post">
+<form th:action="@{/edit}" th:object="${product}" method="post">
+
+<input type="hidden" th:field="*{id}">
 
 <table>
 
@@ -166,7 +169,6 @@ input:focus, select:focus {
             <option value="Vegetables">Vegetables</option>
             <option value="Fitness">Fitness</option>
             <option value="Furniture">Furniture</option>
-            <option value="Sports">Sports</option>
             <option value="Other">Other</option>
         </select>
 
@@ -194,7 +196,7 @@ input:focus, select:focus {
 
 </table>
 
-<input type="submit" value="Submit" class="submit-btn">
+<input type="submit" value="Update" class="submit-btn">
 
 </form>
 

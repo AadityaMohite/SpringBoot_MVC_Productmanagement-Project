@@ -8,4 +8,6 @@ public interface ProductService {
 
 	public abstract void SaveProduct(Product product);
 	public abstract List<Product> getAllProducts();
+   public abstract Product updateproduct(int id);
+   public abstract void deleteproduct(int id);
 }
