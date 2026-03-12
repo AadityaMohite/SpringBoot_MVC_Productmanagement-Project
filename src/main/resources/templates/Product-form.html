@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add Product</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #4e73df, #1cc88a);
+}
+
+.container {
+    position: relative;   /* IMPORTANT */
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    width: 420px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #4e73df;
+    box-shadow: 0 0 5px rgba(78,115,223,0.4);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4e73df;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #2e59d9;
+}
+/* Error message styling */
+.error-message {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #e74a3b;
+    background: #fdecea;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-left: 4px solid #e74a3b;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Highlight input border when error */
+.input-error {
+    border: 1px solid #e74a3b !important;
+    background-color: #fff5f5;
+}
+
+/* Smooth appearance animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+
+<a th:href="@{/Products}" 
+   class="btn btn-success btn-sm position-absolute top-0 start-0 m-3">
+    Show Products
+</a>
+<br>
+
+<h2>Add Product</h2>
+
+<form th:action="@{save}" th:object="${product}" method="post">
+
+<table>
+
+<tr>
+    <td>Product Name:</td>
+    <td>
+        <input type="text"
+               placeholder="Enter the Product Name"
+               th:field="*{name}"
+               th:classappend="${#fields.hasErrors('name')} ? 'input-error' : ''">
+
+        <div class="error-message"
+             th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}">
+        </div>
+    </td>
+</tr>
+
+<tr>
+    <td>Product Price:</td>
+    <td>
+        <input type="number"
+               placeholder="Enter the Product Price"
+               th:field="*{price}"
+               th:classappend="${#fields.hasErrors('price')} ? 'input-error' : ''">
+
+        <div class="error-message"
+             th:if="${#fields.hasErrors('price')}"
+             th:errors="*{price}">
+        </div>
+    </td>
+</tr>
+
+<tr>
+    <td>Product Category:</td>
+    <td>
+        <select th:field="*{category}"
+                th:classappend="${#fields.hasErrors('category')} ? 'input-error' : ''">
+            <option value="">Select</option>
+            <option value="Electronic">Electronic</option>
+            <option value="Grocery">Grocery</option>
+            <option value="Kitchen & Appliances">Kitchen & Appliances</option>
+            <option value="Stationary">Stationary</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Fitness">Fitness</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <div class="error-message"
+             th:if="${#fields.hasErrors('category')}"
+             th:errors="*{category}">
+        </div>
+    </td>
+</tr>
+
+<tr>
+    <td>Product Quantity:</td>
+    <td>
+        <input type="number"
+               placeholder="Enter the Product Quantity"
+               th:field="*{qty}"
+               th:classappend="${#fields.hasErrors('qty')} ? 'input-error' : ''">
+
+        <div class="error-message"
+             th:if="${#fields.hasErrors('qty')}"
+             th:errors="*{qty}">
+        </div>
+    </td>
+</tr>
+
+</table>
+
+<input type="submit" value="Submit" class="submit-btn">
+
+</form>
+
+</div>
+
+</body>
+</html>
