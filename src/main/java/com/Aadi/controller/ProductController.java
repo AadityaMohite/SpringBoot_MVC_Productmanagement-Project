@@ -121,6 +121,11 @@ public class ProductController {
 		return "redirect:/Products";
 	}
 	
+	@GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access-denied";
+    }
+	
 	
 	
 }

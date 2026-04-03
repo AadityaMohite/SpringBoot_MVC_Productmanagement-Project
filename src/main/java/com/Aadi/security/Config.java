@@ -43,41 +43,24 @@ public class Config {
 		
 		http.csrf(csrf->csrf.disable());
 		
-		
-		http.httpBasic(Customizer.withDefaults());
-		
-		
-		
-		http.authorizeHttpRequests(auth->{
-			
-			auth.requestMatchers("/auth/saveuser").permitAll()
-		    .anyRequest().authenticated();
-			
-			
-		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		http.authorizeHttpRequests(auth -> {
+		    auth.requestMatchers("/auth/saveuser", "/access-denied").permitAll()
+		        .requestMatchers("/product-form").hasAnyRole("ADMIN","USER")
+		        .requestMatchers("/save").hasRole("ADMIN")
+		        .requestMatchers("/products").hasRole("USER")
+		        .requestMatchers("/edit").hasRole("ADMIN")
+		        .requestMatchers("/update").hasRole("ADMIN")
+		        .requestMatchers("/delete").hasRole("ADMIN")
+		        .anyRequest().authenticated();
+		})
+		.exceptionHandling(ex -> ex
+		    .accessDeniedHandler((req, res, excep) -> {
+		        res.sendRedirect("/access-denied");
+		    })
+		)
+		.formLogin(form -> form.permitAll());	
 	return http.build();
 		
-	
-		
-		
-		
-		
-		
 	}
-	
-	
-	
-	
 	
 }

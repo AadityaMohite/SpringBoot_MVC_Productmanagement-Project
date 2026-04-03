@@ -101,8 +101,11 @@
             <td th:text="${product.price}"></td>
             <td th:text="${product.category}"></td>
             <td th:text="${product.qty}"></td>
-            <td> <a th:href="@{/update?(id=${product.id})}" class="btn btn-info">Update</a> 
-            <a  th:href="@{/delete?(id=${product.id})}"   class="btn btn-danger"  onclick="return confirm('Are you want to delete Student data ?');">Delete</a></td>
+            <td> 
+            
+            <a th:href="@{/update?(id=${product.id})}" class="btn btn-info">Update</a> 
+            <a  th:href="@{/delete?(id=${product.id})}"   class="btn btn-danger"  onclick="return confirm('Are you want to delete Student data ?');">Delete</a>
+            </td>
         </tr>
     </tbody>
     
